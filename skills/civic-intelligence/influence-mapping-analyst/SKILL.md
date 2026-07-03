@@ -1,9 +1,9 @@
 ---
-name: crash-data-gate
+name: influence-mapping-analyst
 version: 3.0
 ---
 
-# Crash Data Gate (v3.0)
+# Influence Mapping Analyst (v3.0)
 
 **Core Alignment**: Evidence-first, OPSEC-hardened, fully replicable framework with strong governance and auditability standards.
 

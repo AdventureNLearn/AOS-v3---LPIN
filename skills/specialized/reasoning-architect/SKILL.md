@@ -1,9 +1,9 @@
 ---
-name: thomas-tetralogy-aos-integration
+name: reasoning-architect
 version: 3.0
 ---
 
-# Thomas Tetralogy AOS Integration (v3.0)
+# Reasoning Architect (v3.0)
 
 **Core Alignment**: Evidence-first, OPSEC-hardened, fully replicable framework with strong governance and auditability standards.
 

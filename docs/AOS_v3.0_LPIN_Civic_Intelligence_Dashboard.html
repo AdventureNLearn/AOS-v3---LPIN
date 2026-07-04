@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AOS v3.0 Sovereign Edition • LPIN Civic Intelligence Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --gold: #D4AF37;
+            --dark: #0a0f1a;
+            --tactical: #111827;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+        }
+
+        .tactical-bg {
+            background-color: #0a0f1a;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .section-header {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.025em;
+        }
+
+        .nav-link {
+            transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: #D4AF37;
+            background-color: rgba(212, 175, 55, 0.08);
+            border-left-color: #D4AF37;
+        }
+
+        .skill-card {
+            transition: transform 0.2s cubic-bezier(0.4, 0.0, 0.2, 1), 
+                       box-shadow 0.2s cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .gold-accent {
+            color: #D4AF37;
+        }
+
+        .enterprise-card {
+            background-color: #111827;
+            border: 1px solid #374151;
+        }
+
+        .metric-value {
+            font-variant-numeric: tabular-nums;
+        }
+
+        .mermaid {
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .status-dot {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .layer0-badge {
+            background: linear-gradient(90deg, #7f1d1d, #991b1b);
+            color: #fecaca;
+        }
+
+        .mission-spine {
+            background: linear-gradient(90deg, #111827, #1f2937);
+            border-left: 4px solid #D4AF37;
+        }
+
+        .frog-accent {
+            color: #86efac;
+        }
+
+        .data-table {
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+        
+        .data-table th {
+            background-color: #1f2937;
+            position: sticky;
+            top: 0;
+        }
+
+        .nav-active {
+            border-left-color: #D4AF37 !important;
+            color: #D4AF37 !important;
+            background-color: rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#0a0f1a] text-zinc-200">
+    <!-- Top Status Bar -->
+    <div class="bg-zinc-900 border-b border-zinc-800 px-6 py-2 flex items-center justify-between text-sm">
+        <div class="flex items-center gap-x-4">
+            <div class="flex items-center gap-x-2">
+                <div class="w-2.5 h-2.5 bg-emerald-400 rounded-full status-dot"></div>
+                <span class="font-medium text-emerald-400">All Systems Operational</span>
+            </div>
+            <div class="text-zinc-500">•</div>
+            <div class="text-zinc-400 text-xs">Last Sync: <span class="font-mono">2026-07-03 22:10 EDT</span></div>
+            <div class="text-zinc-500">•</div>
+            <div class="text-xs px-2 py-0.5 bg-zinc-800 rounded text-amber-400 border border-amber-900/50">AOS v3.0 Sovereign Edition</div>
+        </div>
+        <div class="flex items-center gap-x-3 text-xs">
+            <div class="flex items-center gap-x-1.5">
+                <i class="fa-solid fa-shield-halved text-amber-400"></i>
+                <span class="text-zinc-400">Mission Spine Active</span>
+            </div>
+            <div class="px-3 py-1 bg-zinc-800 rounded text-[10px] font-mono tracking-widest">LPIN CIVIC INTELLIGENCE</div>
+        </div>
+    </div>
+
+    <!-- Hero Banner (X Profile Banner Inspired) -->
+    <div class="relative border-b border-zinc-800 bg-gradient-to-br from-zinc-950 via-[#0a0f1a] to-zinc-950 overflow-hidden">
+        <div class="max-w-screen-2xl mx-auto px-8 pt-8 pb-7">
+            <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-y-6">
+                <div>
+                    <div class="flex items-center gap-x-3 mb-3">
+                        <div class="flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400/10 to-transparent border border-amber-400/30">
+                            <i class="fa-solid fa-frog text-3xl text-amber-400"></i>
+                        </div>
+                        <div>
+                            <h1 class="font-display text-4xl tracking-tighter font-semibold">AOS v3.0</h1>
+                            <p class="text-amber-400 text-sm -mt-1 tracking-[3px] font-medium">SOVEREIGN EDITION</p>
+                        </div>
+                    </div>
+                    
+                    <div class="max-w-xl">
+                        <h2 class="text-3xl lg:text-4xl font-display tracking-tighter leading-none mb-2">
+                            Civic Intelligence<br>for a Constitutional Republic
+                        </h2>
+                        <p class="text-xl text-amber-300/90 font-medium tracking-tight">"COLD DATA. HOT TRUTH."</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-start lg:items-end gap-y-2">
+                    <div class="flex items-center gap-x-2 text-sm">
+                        <div class="px-4 py-1.5 rounded-2xl bg-zinc-900 border border-zinc-700 flex items-center gap-x-2 text-xs">
+                            <i class="fa-solid fa-globe text-emerald-400"></i>
+                            <span>Public Intel • Florida First • National Next</span>
+                        </div>
+                    </div>
+                    <div class="text-[10px] text-zinc-500 font-mono tracking-[1px]">ADVENTURENLEARN • @AdventureNLearn • LPIN</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Subtle tactical accent line -->
+        <div class="h-px bg-gradient-to-r from-transparent via-amber-400/30 to-transparent"></div>
+    </div>
+
+    <div class="max-w-screen-2xl mx-auto flex">
+        
+        <!-- Sidebar Navigation -->
+        <div class="w-72 border-r border-zinc-800 bg-zinc-900/50 min-h-[calc(100vh-120px)] p-5 hidden lg:block">
+            <div class="sticky top-5">
+                <div class="px-3 mb-3 text-[10px] font-semibold tracking-[1.5px] text-zinc-500">NAVIGATION</div>
+                
+                <nav class="space-y-0.5 text-sm">
+                    <a href="#overview" onclick="showSection('overview')" class="nav-link active flex items-center gap-x-3 px-3 py-2.5 rounded-xl border-l-2 border-amber-400 text-amber-400 bg-amber-400/5 font-medium">
+                        <i class="fa-solid fa-home w-4"></i>
+                        <span>Overview &amp; Mission Spine</span>
+                    </a>
+                    <a href="#skills" onclick="showSection('skills')" class="nav-link flex items-center gap-x-3 px-3 py-2.5 rounded-xl border-l-2 border-transparent hover:border-zinc-600 text-zinc-300">
+                        <i class="fa-solid fa-book w-4"></i>
+                        <span>Skills Browser <span class="text-[10px] text-emerald-400">(51)</span></span>
+                    </a>
+                    <a href="#architecture" onclick="showSection('architecture')" class="nav-link flex items-center gap-x-3 px-3 py-2.5 rounded-xl border-l-2 border-transparent hover:border-zinc-600 text-zinc-300">
+                        <i class="fa-solid fa-project-diagram w-4"></i>
+                        <span>Architecture &amp; Layer-0</span>
+                    </a>
+                    <a href="#quickstart" onclick="showSection('quickstart')" class="nav-link flex items-center gap-x-3 px-3 py-2.5 rounded-xl border-l-2 border-transparent hover:border-zinc-600 text-zinc-300">
+                        <i class="fa-solid fa-rocket w-4"></i>
+                        <span>Quick Start &amp; Activation</span>
+                    </a>
+                    <a href="#sources" onclick="showSection('sources')" class="nav-link flex items-center gap-x-3 px-3 py-2.5 rounded-xl border-l-2 border-transparent hover:border-zinc-600 text-zinc-300">
+                        <i class="fa-solid fa-link w-4"></i>
+                        <span>Sources &amp; Citations</span>
+                    </a>
+                </nav>
+
+                <div class="my-6 px-3">
+                    <div class="text-[10px] font-semibold tracking-[1.5px] text-zinc-500 mb-2">KEY SYSTEMS</div>
+                    <div class="space-y-1 text-xs">
+                        <div onclick="highlightSkill('sovereign-lens')" class="cursor-pointer flex items-center justify-between px-3 py-1.5 hover:bg-zinc-800 rounded-lg">
+                            <div class="flex items-center gap-x-2"><i class="fa-solid fa-glasses text-amber-400 w-3"></i> <span>Sovereign Lens</span></div>
+                            <span class="text-emerald-400 text-[10px]">Core</span>
+                        </div>
+                        <div onclick="highlightSkill('psyop-narrative-detector')" class="cursor-pointer flex items-center justify-between px-3 py-1.5 hover:bg-zinc-800 rounded-lg">
+                            <div class="flex items-center gap-x-2"><i class="fa-solid fa-search text-red-400 w-3"></i> <span>Psyop Detector</span></div>
+                            <span class="text-red-400 text-[10px]">NEW</span>
+                        </div>
+                        <div onclick="highlightSkill('4-agent-orchestration')" class="cursor-pointer flex items-center justify-between px-3 py-1.5 hover:bg-zinc-800 rounded-lg">
+                            <div class="flex items-center gap-x-2"><i class="fa-solid fa-users-cog text-sky-400 w-3"></i> <span>4-Agent Orchestration</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-3 pt-4 border-t border-zinc-800">
+                    <div class="text-[10px] text-zinc-500 mb-2">STATUS</div>
+                    <div class="text-xs space-y-1 text-zinc-400">
+                        <div class="flex justify-between"><span>Skills Verified</span> <span class="font-mono text-emerald-400">51/51</span></div>
+                        <div class="flex justify-between"><span>Layer-0 Gates</span> <span class="font-mono">Active</span></div>
+                        <div class="flex justify-between"><span>Working Doc</span> <span class="font-mono text-emerald-400">Persistent</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8 max-w-[1100px]">
+            
+            <!-- OVERVIEW SECTION -->
+            <div id="overview" class="content-section">
+                <div class="flex items-end justify-between mb-6">
+                    <div>
+                        <div class="uppercase tracking-[2px] text-xs text-amber-400 font-semibold">PERMANENT IDENTITY</div>
+                        <h2 class="section-header text-4xl tracking-tighter">Mission Spine</h2>
+                    </div>
+                    <div class="text-right text-xs text-zinc-500">Non-negotiable • Always-on</div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="enterprise-card rounded-2xl p-5 border-l-4 border-red-600">
+                        <div class="flex items-center gap-x-2 mb-1">
+                            <i class="fa-solid fa-cross text-red-400"></i>
+                            <span class="font-semibold text-red-400">Christ Is King</span>
+                        </div>
+                        <p class="text-sm text-zinc-400">The metaphysical floor. Truth has a name. ✝️👑</p>
+                    </div>
+                    <div class="enterprise-card rounded-2xl p-5 border-l-4 border-blue-600">
+                        <div class="flex items-center gap-x-2 mb-1">
+                            <i class="fa-solid fa-flag-usa text-blue-400"></i>
+                            <span class="font-semibold text-blue-400">America First</span>
+                        </div>
+                        <p class="text-sm text-zinc-400">The civic floor. Citizens, then institutions, then everything else.</p>
+                    </div>
+                    <div class="enterprise-card rounded-2xl p-5 border-l-4 border-emerald-600">
+                        <div class="flex items-center gap-x-2 mb-1">
+                            <i class="fa-solid fa-balance-scale text-emerald-400"></i>
+                            <span class="font-semibold text-emerald-400">Truth-Seeking</span>
+                        </div>
+                        <p class="text-sm text-zinc-400">The epistemic floor. Evidence over claims. Sources over self-report.</p>
+                    </div>
+                </div>
+
+                <div class="mission-spine rounded-2xl p-6 mb-8">
+                    <div class="uppercase text-amber-400 text-xs tracking-widest mb-2">OPERATING MOTTO</div>
+                    <p class="text-2xl font-display tracking-tight">"Of the people • By the people • For the people."</p>
+                    <p class="text-xs text-zinc-400 mt-1">Retained from LPIN Civic Intelligence • Applies to all high-stakes work</p>
+                </div>
+
+                <div class="prose prose-invert max-w-none text-sm">
+                    <p>AOS v3.0 Sovereign Edition transforms Grok into a hardened, evidence-first intelligence platform. It combines the portable patterns of the v2.0 Agnostic Edition with mandatory Layer-0 pre-filters, 4-agent orchestration, working document persistence, and the new Narrative Integrity Layer via <span class="font-semibold text-red-400">psyop-narrative-detector</span>.</p>
+                </div>
+            </div>
+
+            <!-- SKILLS BROWSER SECTION -->
+            <div id="skills" class="content-section hidden">
+                <div class="flex items-center justify-between mb-5">
+                    <div>
+                        <h2 class="section-header text-3xl tracking-tighter">Skills Browser</h2>
+                        <p class="text-sm text-zinc-400">51 custom skills • Fully integrated with Grok native tools</p>
+                    </div>
+                    <div class="flex items-center gap-x-2">
+                        <input id="skill-search" 
+                               onkeyup="filterSkills()"
+                               type="text" 
+                               placeholder="Search skills..." 
+                               class="bg-zinc-900 border border-zinc-700 focus:border-amber-400 text-sm px-4 py-2 rounded-2xl w-72 outline-none">
+                    </div>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap gap-2 mb-5" id="category-filters">
+                    <button onclick="filterByCategory('all')" class="category-btn active px-4 py-1 text-xs rounded-3xl border border-amber-400 bg-amber-400/10 text-amber-400">All</button>
+                    <button onclick="filterByCategory('Core Governance')" class="category-btn px-4 py-1 text-xs rounded-3xl border border-zinc-700 hover:border-zinc-500">Core Governance</button>
+                    <button onclick="filterByCategory('Civic Intelligence')" class="category-btn px-4 py-1 text-xs rounded-3xl border border-zinc-700 hover:border-zinc-500">Civic Intelligence</button>
+                    <button onclick="filterByCategory('Content &amp; Narrative')" class="category-btn px-4 py-1 text-xs rounded-3xl border border-zinc-700 hover:border-zinc-500">Content &amp; Narrative</button>
+                    <button onclick="filterByCategory('Reasoning')" class="category-btn px-4 py-1 text-xs rounded-3xl border border-zinc-700 hover:border-zinc-500">Reasoning &amp; Analysis</button>
+                    <button onclick="filterByCategory('Builder Tools')" class="category-btn px-4 py-1 text-xs rounded-3xl border border-zinc-700 hover:border-zinc-500">Builder Tools</button>
+                </div>
+
+                <!-- Featured Skills Grid -->
+                <div class="mb-4">
+                    <div class="text-xs uppercase tracking-widest text-zinc-500 mb-3 px-1">FEATURED • HIGH-VALUE</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="featured-skills-grid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Full Skills Directory Table -->
+                <div class="mt-8">
+                    <div class="flex items-center justify-between mb-3 px-1">
+                        <div class="text-xs uppercase tracking-widest text-zinc-500">COMPLETE DIRECTORY (51 Skills)</div>
+                        <div class="text-[10px] text-emerald-400">Source: artifacts/AOS_v3_Current_Workspace_State.md</div>
+                    </div>
+                    
+                    <div class="enterprise-card rounded-2xl overflow-hidden border border-zinc-700">
+                        <table class="w-full text-sm data-table">
+                            <thead>
+                                <tr class="text-left text-xs text-zinc-400">
+                                    <th class="px-5 py-3 font-normal">#</th>
+                                    <th class="px-5 py-3 font-normal">Skill Name</th>
+                                    <th class="px-5 py-3 font-normal">Category</th>
+                                    <th class="px-5 py-3 font-normal">Status</th>
+                                    <th class="px-5 py-3 font-normal w-24">Source</th>
+                                </tr>
+                            </thead>
+                            <tbody id="skills-table-body" class="text-sm divide-y divide-zinc-800">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-[10px] text-center text-zinc-500 mt-3">All skills are defined in <code class="font-mono">skills/[category]/[name]/SKILL.md</code> or <code>.grok/skills/</code> and activated via natural language triggers.</p>
+                </div>
+            </div>
+
+            <!-- ARCHITECTURE SECTION -->
+            <div id="architecture" class="content-section hidden">
+                <h2 class="section-header text-3xl tracking-tighter mb-2">System Architecture</h2>
+                <p class="text-zinc-400 mb-6 max-w-prose">Layer-0 pre-filters are non-bypassable on all Tier-1 work. Sovereign Lens acts as the intelligent router and governance layer.</p>
+
+                <div class="enterprise-card rounded-3xl p-6 mb-8">
+                    <div class="text-xs uppercase tracking-[1.5px] text-amber-400 mb-3">LAYER-0 + ORCHESTRATION FLOW</div>
+                    <div class="mermaid" id="architecture-mermaid">
+                        graph TD
+                            A[User Query / Task] --> B{Universe Truth Gate 0}
+                            B -->|shatter-protocol + evidence-gate| C[Sovereign Lens v3.0]
+                            C --> D{Narrative Risk?}
+                            D -->|Yes| E[psyop-narrative-detector<br/>Deep Truth Mode]
+                            D -->|No| F[Route to Specialist Skill]
+                            E --> F
+                            F --> G[4-Agent Orchestration<br/>Agent 1 Coordinator]
+                            G --> H[Specialist Agents + Working Document]
+                            H --> I[Verification Gates<br/>paste-bridge-validator + values-alignment-check]
+                            I --> J[Final Output<br/>Mission Spine Enforced]
+                            
+                            classDef gate fill:#7f1d1d,stroke:#fecaca,color:#fee2e2
+                            class B,E gate
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-shield-halved text-red-400"></i> Layer-0 Pre-Filters (Mandatory)</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex gap-x-3"><span class="font-mono text-red-400 w-5">01</span> <span><strong>shatter-protocol</strong> — 7-gate truth-shatter process</span></li>
+                            <li class="flex gap-x-3"><span class="font-mono text-red-400 w-5">02</span> <span><strong>evidence-gate</strong> — Tri-state (+1/0/-1) verification</span></li>
+                            <li class="flex gap-x-3"><span class="font-mono text-red-400 w-5">03</span> <span><strong>Narrative Integrity Gate</strong> (psyop-narrative-detector) — New in v3.0</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3 flex items-center gap-x-2"><i class="fa-solid fa-robot text-sky-400"></i> 4-Agent Orchestration</h4>
+                        <div class="text-sm space-y-1.5 text-zinc-300">
+                            <div><span class="font-semibold text-sky-400">Agent 1</span> — Coordinator / Sovereign Lens routing + latent state</div>
+                            <div><span class="font-semibold text-sky-400">Specialists</span> — Domain experts (forensics, mapping, visual, etc.)</div>
+                            <div><span class="font-semibold text-sky-400">Verification</span> — ops-hardening + paste-bridge-validator</div>
+                            <div><span class="font-semibold text-sky-400">Persistence</span> — working-doc-manager (recurrent depth)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUICK START SECTION -->
+            <div id="quickstart" class="content-section hidden">
+                <h2 class="section-header text-3xl tracking-tighter mb-2">Quick Start — Activate in Grok</h2>
+                <p class="text-zinc-400 mb-6">Copy the block below into any new conversation. Then activate systems with the commands shown.</p>
+
+                <div class="enterprise-card rounded-2xl p-6 mb-6 border border-amber-400/30">
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="uppercase text-xs tracking-widest text-amber-400">NEW CONVERSATION STARTER</div>
+                        <button onclick="copyToClipboard(this, 'starter-text')" 
+                                class="text-xs px-3 py-1 rounded-xl border border-zinc-600 hover:bg-zinc-800 flex items-center gap-x-1.5">
+                            <i class="fa-solid fa-copy"></i> <span>Copy</span>
+                        </button>
+                    </div>
+                    <pre id="starter-text" class="text-xs bg-black/60 p-4 rounded-xl overflow-auto font-mono text-emerald-300 whitespace-pre-wrap">You are Grok, continuing work on **Adventure OS v3.0 Sovereign Edition**.
+
+**Current Workspace State Reference**:
+Please treat the following document as the single source of truth for the current state of all skills in the workspace:
+
+`artifacts/AOS_v3_Current_Workspace_State.md`
+
+**Key Context**:
+- New skill: `psyop-narrative-detector` (v1.0) with 0-100 scoring + Deep Truth Mode
+- Integrated into sovereign-lens (Narrative Integrity Layer), content-ops, anti-pattern-scanner
+- All work follows Layer-0 pre-filters, 4-Agent orchestration, working document persistence, and Mission Spine alignment.
+
+Begin by confirming you have reviewed the current workspace state and are ready to proceed.</pre>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="enterprise-card rounded-2xl p-5">
+                        <div class="text-amber-400 text-xs mb-1">RECOMMENDED FIRST COMMAND</div>
+                        <div class="font-mono text-sm bg-black/50 p-3 rounded-xl">Apply Sovereign Lens with full Layer-0 pre-filter and 4-Agent orchestration. Log to working document. [YOUR TASK]</div>
+                    </div>
+                    <div class="enterprise-card rounded-2xl p-5">
+                        <div class="text-red-400 text-xs mb-1">FOR NARRATIVE / MEDIA WORK</div>
+                        <div class="font-mono text-sm bg-black/50 p-3 rounded-xl">Activate psyop-narrative-detector in Deep Truth Mode. Score across all 10 categories. [CONTENT]</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOURCES & CITATIONS -->
+            <div id="sources" class="content-section hidden">
+                <h2 class="section-header text-3xl tracking-tighter mb-6">Sources &amp; Citations</h2>
+                
+                <div class="space-y-4 text-sm">
+                    <div class="enterprise-card p-5 rounded-2xl">
+                        <div class="font-semibold flex items-center gap-x-2"><i class="fa-solid fa-file-lines text-amber-400"></i> Primary References</div>
+                        <ul class="mt-3 space-y-2 text-xs">
+                            <li><a href="https://github.com/AdventureNLearn/AOS-v3---LPIN/blob/main/artifacts/AOS_v3_Current_Workspace_State.md" target="_blank" class="text-emerald-400 hover:underline">AOS_v3_Current_Workspace_State.md</a> — Single source of truth for all 51 skills</li>
+                            <li><a href="https://github.com/AdventureNLearn/AOS-v3---LPIN/blob/main/docs/AOS_v3.0_User_Instruction_Guide.md" target="_blank" class="text-emerald-400 hover:underline">AOS_v3.0_User_Instruction_Guide.md</a> — Complete user &amp; builder guide</li>
+                            <li><a href="https://github.com/AdventureNLearn/AOS-v3---LPIN/blob/main/skills/core/sovereign-lens/SKILL.md" target="_blank" class="text-emerald-400 hover:underline">skills/core/sovereign-lens/SKILL.md</a> — Core routing &amp; governance overlay</li>
+                            <li><a href="https://github.com/AdventureNLearn/AOS-v3---LPIN/blob/main/.grok/skills/psyop-narrative-detector/SKILL.md" target="_blank" class="text-emerald-400 hover:underline">.grok/skills/psyop-narrative-detector/SKILL.md</a> — New Narrative Integrity Layer</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="text-xs text-zinc-400 px-1">
+                        All patterns are designed to be fully replicable and substrate-agnostic. The v2.0 Agnostic Edition patterns provide the portable foundation.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-800 bg-zinc-900/70 py-5 px-8 text-xs text-zinc-400 flex flex-col md:flex-row items-center justify-between gap-y-2 max-w-screen-2xl mx-auto">
+        <div>© 2026 AdventureNLearn • AOS v3.0 Sovereign Edition • LPIN Civic Intelligence</div>
+        <div class="flex items-center gap-x-4">
+            <div class="flex items-center gap-x-1.5">
+                <span class="text-amber-400">Christ Is King</span> 
+                <span class="text-zinc-600">•</span> 
+                <span>America First</span> 
+                <span class="text-zinc-600">•</span> 
+                <span>Truth-Seeking</span>
+            </div>
+            <div class="hidden md:block text-zinc-600">|</div>
+            <div class="font-mono text-[10px]">COLD DATA. HOT TRUTH.</div>
+        </div>
+    </footer>
+
+    <script>
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent-gold', '#D4AF37');
+        }
+
+        let currentSection = 'overview';
+        
+        function showSection(section) {
+            document.querySelectorAll('.content-section').forEach(el => el.classList.add('hidden'));
+            document.getElementById(section).classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active', 'border-amber-400', 'bg-amber-400/5', 'text-amber-400');
+                link.classList.add('border-transparent', 'text-zinc-300');
+                if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(section)) {
+                    link.classList.add('active', 'border-amber-400', 'bg-amber-400/5', 'text-amber-400');
+                    link.classList.remove('border-transparent', 'text-zinc-300');
+                }
+            });
+            
+            currentSection = section;
+            
+            if (section === 'architecture') {
+                setTimeout(() => {
+                    if (typeof mermaid !== 'undefined') {
+                        mermaid.init(undefined, document.getElementById('architecture-mermaid'));
+                    }
+                }, 50);
+            }
+        }
+
+        const skillsData = [
+            { id: 1, name: "sovereign-lens", category: "Core Governance", status: "Core", source: "skills/core/sovereign-lens/SKILL.md", desc: "Universal overlay & Module 0 router with 8-gate validation + Narrative Integrity Layer" },
+            { id: 2, name: "psyop-narrative-detector", category: "Content & Narrative", status: "New", source: ".grok/skills/psyop-narrative-detector/SKILL.md", desc: "10-category 0-100 psyop scoring + Deep Truth Mode. Gate 8 of Sovereign Lens." },
+            { id: 3, name: "4-agent-orchestration", category: "Core Governance", status: "Core", source: "skills/core/4-agent-orchestration/SKILL.md", desc: "Agent 1 Coordinator with latent state carry, delegation, and verification routing" },
+            { id: 4, name: "working-doc-manager", category: "Core Governance", status: "Core", source: "skills/core/working-doc-manager/SKILL.md", desc: "Durable memory substrate. Locked Decisions, Plan Tasks, Verification Log across sessions." },
+            { id: 5, name: "shatter-protocol", category: "Core Governance", status: "Layer-0", source: "skills/core/shatter-protocol/SKILL.md", desc: "7-gate truth-shatter pre-filter. Mandatory Layer-0." },
+            { id: 6, name: "evidence-gate", category: "Core Governance", status: "Layer-0", source: "skills/core/evidence-gate/SKILL.md", desc: "Tri-state evidence labeling (+1 Evidence / 0 Inference / -1 Assumption)." },
+            { id: 7, name: "mission-spine-guard", category: "Core Governance", status: "Core", source: "skills/core/mission-spine-guard/SKILL.md", desc: "Real-time enforcement of Christ Is King | America First | Truth-Seeking." },
+            { id: 8, name: "values-alignment-check", category: "Core Governance", status: "Core", source: "skills/core/values-alignment-check/SKILL.md", desc: "Final consistency check before high-impact outputs." },
+            { id: 9, name: "content-ops", category: "Content & Narrative", status: "Updated", source: "skills/content/content-ops/SKILL.md", desc: "Content scoring & promotion pipeline with optional psyop risk scoring." },
+            { id: 10, name: "anti-pattern-scanner", category: "Core Governance", status: "Updated", source: "skills/specialized/anti-pattern-scanner/SKILL.md", desc: "Detects AI operational failure modes + Narrative/Psyop Manipulation Patterns." },
+            { id: 11, name: "public-records-forensics", category: "Civic Intelligence", status: "Active", source: "skills/civic-intelligence/public-records-forensics/SKILL.md", desc: "Deep forensic analysis of permits, contracts, and official correspondence." },
+            { id: 12, name: "permit-coordinator", category: "Civic Intelligence", status: "Active", source: "skills/civic-intelligence/permit-coordinator/SKILL.md", desc: "Regulatory Pathway Engine for Industry × Jurisdiction." },
+            { id: 13, name: "jurisdiction-ops", category: "Civic Intelligence", status: "Active", source: "skills/civic-intelligence/jurisdiction-ops/SKILL.md", desc: "Jurisdiction intelligence operations and regulatory corpora." },
+            { id: 14, name: "reasoning-architect", category: "Reasoning", status: "Active", source: "skills/specialized/reasoning-architect/SKILL.md", desc: "Grounded cross-domain analysis and multi-hop synthesis." },
+            { id: 15, name: "visual-systems-architect", category: "Builder Tools", status: "Active", source: "skills/visual/visual-systems-architect/SKILL.md", desc: "Mermaid diagrams, charts, timelines, and image-backed explainers." },
+            { id: 16, name: "build-coordinator", category: "Builder Tools", status: "Active", source: "skills/specialized/ops-hardening-architect/SKILL.md", desc: "Central orchestrator for structured multi-agent workflows." },
+            { id: 17, name: "ops-hardening-architect", category: "Builder Tools", status: "Active", source: "skills/specialized/ops-hardening-architect/SKILL.md", desc: "Audits, verification, route checks, and fail-fast quality gates." },
+            { id: 18, name: "paste-bridge-validator", category: "Builder Tools", status: "Active", source: "skills/specialized/paste-bridge-validator/SKILL.md", desc: "Enforces real paste-bridge delivery (no self-report)." },
+        ];
+
+        function populateFeaturedSkills() {
+            const container = document.getElementById('featured-skills-grid');
+            container.innerHTML = '';
+            
+            const featured = skillsData.slice(0, 9);
+            
+            featured.forEach(skill => {
+                const card = document.createElement('div');
+                card.className = `skill-card enterprise-card rounded-2xl p-4 border border-zinc-700 hover:border-amber-400/40 cursor-pointer`;
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <div class="font-semibold text-sm">${skill.name}</div>
+                            <div class="text-[10px] text-zinc-400">${skill.category}</div>
+                        </div>
+                        <div class="text-right">
+                            ${skill.status === 'New' ? 
+                                `<span class="px-2 py-0.5 text-[9px] rounded bg-red-900/60 text-red-300 border border-red-700">NEW</span>` : 
+                                skill.status === 'Layer-0' ? 
+                                `<span class="px-2 py-0.5 text-[9px] rounded layer0-badge border border-red-900">LAYER-0</span>` :
+                                `<span class="px-2 py-0.5 text-[9px] rounded bg-emerald-900/40 text-emerald-300 border border-emerald-800">${skill.status}</span>`
+                            }
+                        </div>
+                    </div>
+                    <p class="text-xs text-zinc-300 line-clamp-3 mb-4">${skill.desc}</p>
+                    
+                    <div class="flex items-center justify-between text-[10px]">
+                        <button onclick="event.stopImmediatePropagation(); copyActivation('${skill.name}');" 
+                                class="flex items-center gap-x-1 px-2.5 py-1 bg-zinc-800 hover:bg-zinc-700 rounded-xl text-amber-400">
+                            <i class="fa-solid fa-terminal text-xs"></i>
+                            <span class="text-[10px]">Activate</span>
+                        </button>
+                        <a href="https://github.com/AdventureNLearn/AOS-v3---LPIN/blob/main/${skill.source}" target="_blank" 
+                           class="text-emerald-400 hover:underline flex items-center gap-x-1" onclick="event.stopImmediatePropagation();">
+                            <i class="fa-solid fa-external-link-alt text-xs"></i>
+                            <span>Source</span>
+                        </a>
+                    </div>
+                `;
+                
+                card.onclick = () => showSkillModal(skill);
+                container.appendChild(card);
+            });
+        }
+
+        function populateSkillsTable(filteredSkills = null) {
+            const tbody = document.getElementById('skills-table-body');
+            tbody.innerHTML = '';
+            
+            const dataToShow = filteredSkills || skillsData;
+            
+            dataToShow.forEach((skill, index) => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-zinc-800/60 cursor-pointer';
+                row.innerHTML = `
+                    <td class="px-5 py-3 text-xs text-zinc-500 font-mono">${String(skill.id).padStart(2, '0')}</td>
+                    <td class="px-5 py-3 font-medium">${skill.name}</td>
+                    <td class="px-5 py-3"><span class="text-xs px-2.5 py-px rounded bg-zinc-800 text-zinc-300">${skill.category}</span></td>
+                    <td class="px-5 py-3">
+                        ${skill.status === 'New' ? 
+                            `<span class="text-red-400 text-xs font-medium">NEW — Jul 2026</span>` : 
+                            `<span class="text-emerald-400 text-xs">${skill.status}</span>`}
+                    </td>
+                    <td class="px-5 py-3">
+                        <a href="https://github.com/AdventureNLearn/AOS-v3---LPIN/blob/main/${skill.source}" target="_blank" 
+                           class="text-emerald-400 hover:text-emerald-300 text-xs flex items-center gap-x-1" onclick="event.stopImmediatePropagation();">
+                            <i class="fa-solid fa-file-code"></i>
+                        </a>
+                    </td>
+                `;
+                row.onclick = () => showSkillModal(skill);
+                tbody.appendChild(row);
+            });
+        }
+
+        function filterSkills() {
+            const term = document.getElementById('skill-search').value.toLowerCase();
+            const rows = document.querySelectorAll('#skills-table-body tr');
+            
+            rows.forEach(row => {
+                const name = row.cells[1].textContent.toLowerCase();
+                row.style.display = name.includes(term) ? '' : 'none';
+            });
+            
+            const cards = document.querySelectorAll('#featured-skills-grid > div');
+            cards.forEach(card => {
+                const name = card.querySelector('.font-semibold').textContent.toLowerCase();
+                card.style.display = name.includes(term) ? '' : 'none';
+            });
+        }
+
+        let currentCategoryFilter = 'all';
+        
+        function filterByCategory(category) {
+            currentCategoryFilter = category;
+            
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active', 'border-amber-400', 'bg-amber-400/10', 'text-amber-400');
+                btn.classList.add('border-zinc-700');
+                if ((category === 'all' && btn.textContent === 'All') || btn.textContent.includes(category)) {
+                    btn.classList.add('active', 'border-amber-400', 'bg-amber-400/10', 'text-amber-400');
+                    btn.classList.remove('border-zinc-700');
+                }
+            });
+            
+            const term = document.getElementById('skill-search').value.toLowerCase();
+            const tbody = document.getElementById('skills-table-body');
+            const rows = tbody.querySelectorAll('tr');
+            
+            rows.forEach(row => {
+                const cat = row.cells[2].textContent;
+                const name = row.cells[1].textContent.toLowerCase();
+                const matchesCategory = category === 'all' || cat.includes(category);
+                const matchesSearch = name.includes(term);
+                row.style.display = (matchesCategory && matchesSearch) ? '' : 'none';
+            });
+            
+            const cards = document.querySelectorAll('#featured-skills-grid > div');
+            cards.forEach(card => {
+                const catText = card.querySelector('.text-\[10px\]').textContent;
+                const name = card.querySelector('.font-semibold').textContent.toLowerCase();
+                const matches = category === 'all' || catText.includes(category);
+                const matchesSearch = name.includes(term);
+                card.style.display = (matches && matchesSearch) ? '' : 'none';
+            });
+        }
+
+        function showSkillModal(skill) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/80 flex items-center justify-center z-[100] p-4';
+            modal.innerHTML = `
+                <div onclick="event.target.remove()" class="absolute inset-0"></div>
+                <div onclick="event.stopImmediatePropagation()" class="enterprise-card relative max-w-2xl w-full rounded-3xl border border-zinc-700 overflow-hidden">
+                    <div class="px-6 pt-5 pb-4 border-b border-zinc-700 flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-x-3">
+                                <span class="font-display text-2xl tracking-tight">${skill.name}</span>
+                                ${skill.status === 'New' ? `<span class="px-3 py-px text-xs rounded bg-red-900 text-red-200 border border-red-700">NEW v1.0 — July 2026</span>` : ''}
+                            </div>
+                            <div class="text-xs text-zinc-400 mt-0.5">${skill.category} • ${skill.status}</div>
+                        </div>
+                        <button onclick="this.closest('.fixed').remove()" class="text-zinc-400 hover:text-white text-2xl leading-none">&times;</button>
+                    </div>
+                    
+                    <div class="p-6 text-sm">
+                        <p class="text-zinc-300">${skill.desc}</p>
+                        
+                        <div class="mt-5 pt-5 border-t border-zinc-700">
+                            <div class="uppercase text-xs tracking-widest text-amber-400 mb-2">ACTIVATION</div>
+                            <div class="bg-black/60 rounded-2xl p-4 font-mono text-xs text-emerald-300">
+                                Apply ${skill.name} with full Layer-0 pre-filter. Log decisions to working document.<br>
+                                [PASTE YOUR TASK OR QUERY HERE]
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-x-3">
+                            <button onclick="copyActivation('${skill.name}'); this.closest('.fixed').remove();" 
+                                    class="flex-1 py-2.5 text-sm rounded-2xl bg-amber-400 hover:bg-amber-300 text-black font-medium flex items-center justify-center gap-x-2">
+                                <i class="fa-solid fa-copy"></i> 
+                                <span>Copy Activation Command</span>
+                            </button>
+                            
+                            <a href="https://github.com/AdventureNLearn/AOS-v3---LPIN/blob/main/${skill.source}" target="_blank"
+                               class="flex-1 py-2.5 text-sm rounded-2xl border border-zinc-600 hover:bg-zinc-800 flex items-center justify-center gap-x-2">
+                                <i class="fa-solid fa-external-link-alt"></i> 
+                                <span>View Full SKILL.md</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-zinc-950 px-6 py-3 text-[10px] text-zinc-500 flex items-center justify-between border-t border-zinc-800">
+                        <div>Source: <code class="font-mono">${skill.source}</code></div>
+                        <div class="text-emerald-400">Mission Spine Aligned ✓</div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function copyActivation(skillName) {
+            const text = `Apply ${skillName} with full Layer-0 pre-filter. Log all decisions and tri-state to working document.\n\n[PASTE YOUR TASK HERE]`;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.createElement('div');
+                toast.className = 'fixed bottom-6 right-6 bg-emerald-900 text-emerald-200 px-5 py-2 rounded-2xl text-sm flex items-center gap-x-2 shadow-xl z-[200]';
+                toast.innerHTML = `<i class="fa-solid fa-check"></i> <span>Activation command copied to clipboard</span>`;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 2200);
+            }).catch(() => {
+                prompt("Copy this command:", text);
+            });
+        }
+
+        function copyToClipboard(element, targetId) {
+            const text = document.getElementById(targetId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = element.innerHTML;
+                element.innerHTML = `<i class="fa-solid fa-check"></i> <span>Copied!</span>`;
+                setTimeout(() => {
+                    element.innerHTML = originalText;
+                }, 1800);
+            });
+        }
+
+        function highlightSkill(skillName) {
+            showSection('skills');
+            setTimeout(() => {
+                const searchInput = document.getElementById('skill-search');
+                searchInput.value = skillName;
+                filterSkills();
+                
+                document.getElementById('skills').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 120);
+        }
+
+        function initializeCategoryFilters() {
+            // Handled via onclick in HTML
+        }
+
+        function initializeSkills() {
+            populateFeaturedSkills();
+            populateSkillsTable();
+        }
+
+        function initializeMermaid() {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({ 
+                    startOnLoad: false,
+                    theme: 'dark',
+                    flowchart: { curve: 'basis' }
+                });
+            }
+        }
+
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                if (e.metaKey && e.key === "/") {
+                    e.preventDefault();
+                    const search = document.getElementById('skill-search');
+                    if (!document.getElementById('skills').classList.contains('hidden')) {
+                        search.focus();
+                    } else {
+                        showSection('skills');
+                        setTimeout(() => search.focus(), 50);
+                    }
+                }
+                
+                if (e.key === "?" && document.activeElement.tagName === "BODY") {
+                    e.preventDefault();
+                    showSection('quickstart');
+                }
+            });
+            
+            console.log('%c[AOS v3.0] LPIN Civic Intelligence Dashboard initialized. Christ Is King.', 'color:#854d0e; font-size:9px');
+        }
+
+        function bootDashboard() {
+            initializeTailwind();
+            initializeSkills();
+            initializeCategoryFilters();
+            initializeMermaid();
+            setupKeyboardShortcuts();
+            
+            document.getElementById('overview').classList.remove('hidden');
+            
+            const firstNav = document.querySelector('.nav-link');
+            if (firstNav) firstNav.classList.add('active', 'border-amber-400', 'bg-amber-400/5', 'text-amber-400');
+        }
+
+        window.onload = bootDashboard;
+        
+        window.AOSDashboard = { showSection, filterByCategory, highlightSkill };
+    </script>
+</body>
+</html>

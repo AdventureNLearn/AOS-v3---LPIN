@@ -1,4 +1,3 @@
----
 # AOS v3.0 Sovereign Edition
 
 **Adventure OS v3.0 Sovereign Edition** is a modular, evidence-first AI operating system framework designed for high-integrity, replicable, and governable workflows.

@@ -1,54 +1,57 @@
-Evidence-First • OPSEC-Hardened • Fully Replicable
-
-# AOS v3.0 Sovereign Edition — LPIN Civic Intelligence Release
-
-**Release Date**: July 2026  
-**Version**: v3.0 Sovereign Edition (LPIN Civic Intelligence)  
-**Status**: Production-Ready / GitHub Release Candidate
-
 ---
+# AOS v3.0 Sovereign Edition
 
-## Overview
+**Adventure OS v3.0 Sovereign Edition** is a modular, evidence-first AI operating system framework designed for high-integrity, replicable, and governable workflows.
 
-**Adventure OS (AOS) v3.0 Sovereign Edition** is a fully replicable, evidence-first, OPSEC-hardened AI operator framework designed for sovereign individuals and teams.
+It emphasizes strict Layer-0 pre-filters, 4-Agent orchestration, working document persistence, tri-state evidence tracking, and strong governance enforcement across all skills and processes.
 
-This release focuses on the **LPIN Civic Intelligence** layer — a comprehensive stack for permit/regulatory intelligence, public records forensics, jurisdiction operations, oversight tooling, and citizen accountability workflows — built on top of a rock-solid Core Runtime.
-
-**Key Principles**:
-- **Evidence-First**: Every skill uses tri-state evidence (+1 / 0 / -1), multi-source verification, and explicit audit trails.
-- **Layer-0 Pre-Filters**: Mandatory non-bypassable gates on all Tier 1 work.
-- **Full OPSEC / Frog Protocol**: Private-by-default, codenames for sensitive entities.
-- **Strong Governance**: All artifacts enforce rigorous evidence standards and auditability.
-- **Fully Replicable & Agnostic**: Clean folder-per-skill structure.
-
----
-
-## Directory Structure
+## Current Structure
 
 ```
-AOS_v3_LPIN/
-├── skills/
-│   ├── core/                    # Foundational orchestration, evidence, governance
-│   ├── civic-intelligence/      # Permit, jurisdiction, oversight, forensics
-│   ├── content/                 # Content systems & operations
-│   ├── visual/                  # Visual systems, GIS, symbolic encoding
-│   └── specialized/             # Reference, automation, hardening tools
-├── README.md
-├── RELEASE_NOTES.md
-└── Final_Summary_Report.md
+skills/
+├── core/                    # Foundational runtime and governance skills
+├── civic-intelligence/      # Permit, jurisdiction, oversight, and regulatory tools
+├── content/                 # Content operations and systems architecture
+├── visual/                  # Visual systems, GIS, and symbolic encoding
+└── specialized/             # Domain-specific and advanced tools
+    ├── aos-plugin-mirrors/  # Mirrors of external dev tool integrations
+    └── (other specialized skills)
 ```
 
-Each skill lives in its own folder with a complete `SKILL.md`.
+## Key Principles
+
+- **Layer-0 Pre-Filters**: Non-bypassable validation gates on all Tier 1 work.
+- **4-Agent Orchestration**: Structured multi-agent workflows with clear role separation.
+- **Working Document Persistence**: All major decisions, evidence, and state are logged.
+- **Tri-State Evidence (+1 / 0 / -1)**: Explicit confidence and evidence strength tracking.
+- **Governance Enforcement**: Automatic escalation on detected drift or weakened standards.
+- **Frog Protocol**: Codename usage and private-by-default handling for sensitive work.
+- **Replicability**: All skills and workflows are designed to be portable and auditable.
+
+## How to Use
+
+Each skill lives in its own folder with a `SKILL.md` file containing:
+- Purpose and v3.0 Alignment
+- Core Capabilities
+- Activation Triggers
+- Integration Points
+- OPSEC & Frog Protocol guidance
+- Best Practices
+- Copy-paste ready example activations
+
+To activate a skill, simply reference its name and provide the required context (many skills also support explicit activation phrases).
+
+## Repository Goals
+
+- Full skill expansion with high-quality, detailed documentation
+- Clean, logical folder structure
+- Strong emphasis on evidence integrity and governance
+- Replicable across different environments and use cases
+
+## License
+
+This project is intended for open, replicable use with strong emphasis on evidence-based reasoning and governance.
 
 ---
 
-## Quick Start
-
-1. Clone the repository.
-2. Each skill is independently usable.
-3. Activate skills using their explicit triggers.
-4. All high-stakes work should route through Layer-0 pre-filters.
-
----
-
-*Built with precision. Focused on evidence, auditability, and long-term replicability.*
+*Built for high-stakes, high-integrity work.*

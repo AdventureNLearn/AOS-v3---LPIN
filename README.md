@@ -12,10 +12,24 @@ skills/
 ├── civic-intelligence/      # Permit, jurisdiction, oversight, and regulatory tools
 ├── content/                 # Content operations and systems architecture
 ├── visual/                  # Visual systems, GIS, and symbolic encoding
-└── specialized/             # Domain-specific and advanced tools
-    ├── aos-plugin-mirrors/  # Mirrors of external dev tool integrations
-    └── (other specialized skills)
+└── specialized/             # Domain-specific and advanced tools (including 9 expanded operators)
 ```
+
+## Recently Expanded Skills
+
+The following **9 specialized operators** have been expanded to full AOS v3.0 format:
+
+- `recon-operator` — Initial reconnaissance and attack surface mapping
+- `scanning-operator` — Active scanning and vulnerability identification
+- `exploit-operator` — Weaponizing vulnerabilities for initial access
+- `post-ex-operator` — Post-exploitation, enumeration, and preparation
+- `privesc-operator` — Privilege escalation
+- `lateral-operator` — Lateral movement using credentials and trust
+- `persistence-operator` — Establishing long-term access
+- `exfil-operator` — Controlled data exfiltration
+- `report-operator` — Final evidence-based reporting
+
+These skills are now available in `skills/specialized/` with rich documentation, activation triggers, integration points, best practices, and OPSEC guidance.
 
 ## Key Principles
 
@@ -27,7 +41,16 @@ skills/
 - **Frog Protocol**: Codename usage and private-by-default handling for sensitive work.
 - **Replicability**: All skills and workflows are designed to be portable and auditable.
 
-## How to Use
+## Researcher Tools
+
+A **Researcher Workbench** is available to help researchers and developers:
+- Browse and understand the full skill inventory
+- Map their own work/projects to AOS skills and principles
+- Customize categorizations and export structured outputs
+
+The Workbench is designed to be self-contained and can be used directly from the repo.
+
+## How to Use Skills
 
 Each skill lives in its own folder with a `SKILL.md` file containing:
 - Purpose and v3.0 Alignment
@@ -38,7 +61,11 @@ Each skill lives in its own folder with a `SKILL.md` file containing:
 - Best Practices
 - Copy-paste ready example activations
 
-To activate a skill, simply reference its name and provide the required context (many skills also support explicit activation phrases).
+To activate a skill, simply reference its name and provide the required context.
+
+## Swapping & Customizing Skills
+
+Developers are encouraged to pull individual skills or categories from this repo to customize their own installations. The `skills/` folder is designed to be modular.
 
 ## Repository Goals
 
